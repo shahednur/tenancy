@@ -14,7 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::with('stores')->get();
+        dd($categories);
+        // return view('category.index', compact('categories'));
     }
 
     /**

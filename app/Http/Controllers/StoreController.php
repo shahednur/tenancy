@@ -14,7 +14,8 @@ class StoreController extends Controller
      */
     public function index()
     {
-        //
+        $stores = Store::all();
+        return view('store.index', compact('stores'));
     }
 
     /**
@@ -35,7 +36,18 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validate the request
+        $this->validate($request, [
+            'name' => 'required',
+            'domain' => 'required',
+        ]);
+        //create a new store
+        $store = new Store();
+        $store->name = $request->get('name');
+        $store->domain = $request->get('domain');
+        $store->save();
+        //redirect to the store index page
+        return redirect()->route('store.index')->with('success', 'Store Created Successfully!');
     }
 
     /**

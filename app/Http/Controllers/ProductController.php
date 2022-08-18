@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        // $store = app()->make('store.active');
+        return Product::all();
     }
 
     /**
