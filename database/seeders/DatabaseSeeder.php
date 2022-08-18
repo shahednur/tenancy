@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Store;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,5 +23,10 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Store::factory(3)->has(Category::factory(3)->hasProducts(3, function(array $attrs, Category $category){
+            $attrs['store_id'] = $category->store_id;
+            return $attrs;
+        }))->create();
     }
 }
